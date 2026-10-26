@@ -72,13 +72,13 @@ def fitness(individual:list, dist:list):
     return 1/route_length(individual, dist)
 
 
-def tournament(population:list, dist:list, k:int = 3):
-    candidates = random.sample(population, k)
+def tournament(population:list, fitnesses:list, k:int = 3):
+    candidates = random.sample(range(len(population)), k)
     best = candidates[0]
     for candidate in candidates[1:]:
-        if fitness(candidate, dist) > fitness(best, dist):
+        if fitnesses[candidate] > fitnesses[best]:
             best = candidate
-    return best
+    return population[best]
 
 
 def genetic_algorithm(dist:list, selection = tournament):
@@ -93,10 +93,11 @@ def genetic_algorithm(dist:list, selection = tournament):
     for generation in range(MAX_GENERATIONS):
         population.sort(key=lambda ind: route_length(ind, dist))
         new_population = population[:ELITE_COUNT]
+        fitnesses = [fitness(ind, dist) for ind in population]
 
         while len(new_population) < POPULATION_SIZE:
-            p1 = selection(population, dist)
-            p2 = selection(population, dist)
+            p1 = selection(population, fitnesses)
+            p2 = selection(population, fitnesses)
             child = crossover(p1, p2, count)
             if random.random() < MUTATION_RATE:
                 child = mutate(child, count)
@@ -121,8 +122,7 @@ def genetic_algorithm(dist:list, selection = tournament):
     return best_individual, best_length, best_history, avg_history
 
 
-def roulette(population:list, dist:list):
-    fitnesses = [fitness(individual, dist) for individual in population]
+def roulette(population:list, fitnesses:list):
     total = sum(fitnesses)
     pick = random.uniform(0, total)
     sum_fitness = 0
