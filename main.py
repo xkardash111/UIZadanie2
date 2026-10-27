@@ -16,7 +16,7 @@ def euclidean(x:tuple, y:tuple):
     return sqrt((x[0] - y[0])**2 + (x[1] - y[1])**2)
 
 
-def mutate(ind:list, count:int):
+def mutate(ind:list):
     individual = list(ind)
     l, r = sorted(random.sample(range(len(individual)), 2))
     opa = []
@@ -100,7 +100,7 @@ def genetic_algorithm(dist:list, selection = tournament):
             p2 = selection(population, fitnesses)
             child = crossover(p1, p2, count)
             if random.random() < MUTATION_RATE:
-                child = mutate(child, count)
+                child = mutate(child)
             new_population.append(child)
 
         population = new_population
