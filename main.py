@@ -81,9 +81,10 @@ def tournament(population:list, fitnesses:list, k:int = 3):
     return population[best]
 
 
-def genetic_algorithm(dist:list, selection = tournament):
+def genetic_algorithm(dist:list, selection = tournament, population_size:int = POPULATION_SIZE,
+                      mutation_rate:float = MUTATION_RATE, elite_count:int = ELITE_COUNT):
     count = len(dist)
-    population = generate_population(count, POPULATION_SIZE)
+    population = generate_population(count, population_size)
     best_individual = min(population, key=lambda ind: route_length(ind, dist))
     best_length = route_length(best_individual, dist)
     best_history = []
@@ -92,14 +93,14 @@ def genetic_algorithm(dist:list, selection = tournament):
 
     for generation in range(MAX_GENERATIONS):
         population.sort(key=lambda ind: route_length(ind, dist))
-        new_population = population[:ELITE_COUNT]
+        new_population = population[:elite_count]
         fitnesses = [fitness(ind, dist) for ind in population]
 
-        while len(new_population) < POPULATION_SIZE:
+        while len(new_population) < population_size:
             p1 = selection(population, fitnesses)
             p2 = selection(population, fitnesses)
             child = crossover(p1, p2, count)
-            if random.random() < MUTATION_RATE:
+            if random.random() < mutation_rate:
                 child = mutate(child)
             new_population.append(child)
 

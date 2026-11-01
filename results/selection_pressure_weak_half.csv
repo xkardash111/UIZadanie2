@@ -1,0 +1,7 @@
+method,measured_%,theory_%
+tournament k=2,24.941,24.747
+tournament k=3,12.044,12.121
+tournament k=5,2.737,2.814
+tournament k=10,0.072,0.059
+tournament k=20,0.0,0.0
+roulette,46.662,46.709
