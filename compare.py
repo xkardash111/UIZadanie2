@@ -8,8 +8,8 @@ from math import comb
 
 import matplotlib.pyplot as plt
 
-from main import (generate_cities, distance_matrix, generate_population, route_length, fitness,
-                  genetic_algorithm, tournament, roulette, MAX_GENERATIONS)
+from generic import (generate_cities, distance_matrix, generate_population, route_length, fitness,
+                     genetic_algorithm, tournament, roulette, MAX_GENERATIONS)
 from configs import (MAP_SEED, RUNS, SWEEP_CITIES, SELECTION_CITIES, BASELINE, GA_EXPERIMENTS,
                      PRESSURE_CITIES, PRESSURE_POPULATION, PRESSURE_K, PRESSURE_SAMPLES)
 

@@ -1,5 +1,5 @@
 MAP_SEED = 42
-RUNS = 5
+RUNS = 10
 
 # parameter sweeps are run on this map, one parameter changes, the rest stays BASELINE
 SWEEP_CITIES = 30

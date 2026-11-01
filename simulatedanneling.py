@@ -1,5 +1,5 @@
 import random
-from main import mutate, generate_cities, generate_population, route_length, distance_matrix
+from generic import mutate, generate_cities, generate_population, route_length, distance_matrix
 import math
 
 T0 = 300
